@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Modal TMS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .store-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .store-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .store-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: #3498db;
+        }
+
+        .store-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .store-card:hover .store-icon {
+            transform: scale(1.1);
+        }
+
+        .store-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .store-location {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Warna berbeda untuk setiap ikon */
+        .store-card:nth-child(1) .store-icon { color: #e74c3c; }
+        .store-card:nth-child(2) .store-icon { color: #3498db; }
+        .store-card:nth-child(3) .store-icon { color: #2ecc71; }
+        .store-card:nth-child(4) .store-icon { color: #f39c12; }
+        .store-card:nth-child(5) .store-icon { color: #9b59b6; }
+        .store-card:nth-child(6) .store-icon { color: #1abc9c; }
+        .store-card:nth-child(7) .store-icon { color: #d35400; }
+        .store-card:nth-child(8) .store-icon { color: #34495e; }
+        .store-card:nth-child(9) .store-icon { color: #27ae60; }
+        .store-card:nth-child(10) .store-icon { color: #8e44ad; }
+        .store-card:nth-child(11) .store-icon { color: #c0392b; }
+        .store-card:nth-child(12) .store-icon { color: #16a085; }
+        .store-card:nth-child(13) .store-icon { color: #e67e22; }
+        .store-card:nth-child(14) .store-icon { color: #7f8c8d; }
+        .store-card:nth-child(15) .store-icon { color: #2980b9; }
+        .store-card:nth-child(16) .store-icon { color: #f1c40f; }
+        .store-card:nth-child(17) .store-icon { color: #e74c3c; }
+        .store-card:nth-child(18) .store-icon { color: #2c3e50; }
+        .store-card:nth-child(19) .store-icon { color: #3498db; }
+        .store-card:nth-child(20) .store-icon { color: #e84393; }
+
+        /* Warna berbeda untuk garis atas */
+        .store-card:nth-child(1)::before { background: #e74c3c; }
+        .store-card:nth-child(2)::before { background: #3498db; }
+        .store-card:nth-child(3)::before { background: #2ecc71; }
+        .store-card:nth-child(4)::before { background: #f39c12; }
+        .store-card:nth-child(5)::before { background: #9b59b6; }
+        .store-card:nth-child(6)::before { background: #1abc9c; }
+        .store-card:nth-child(7)::before { background: #d35400; }
+        .store-card:nth-child(8)::before { background: #34495e; }
+        .store-card:nth-child(9)::before { background: #27ae60; }
+        .store-card:nth-child(10)::before { background: #8e44ad; }
+        .store-card:nth-child(11)::before { background: #c0392b; }
+        .store-card:nth-child(12)::before { background: #16a085; }
+        .store-card:nth-child(13)::before { background: #e67e22; }
+        .store-card:nth-child(14)::before { background: #7f8c8d; }
+        .store-card:nth-child(15)::before { background: #2980b9; }
+        .store-card:nth-child(16)::before { background: #f1c40f; }
+        .store-card:nth-child(17)::before { background: #e74c3c; }
+        .store-card:nth-child(18)::before { background: #2c3e50; }
+        .store-card:nth-child(19)::before { background: #3498db; }
+        .store-card:nth-child(20)::before { background: #e84393; }
+
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1> Laporan Modal TMS</h1>
+    </div>
+
+    <div class="dashboard">
+        <!-- Sabang -->
+        <div class="store-card" onclick="window.open('https://docs.google.com/spreadsheets/d/1e2oOgael-A_xl5FqSfihLJjKECKKZm0nTSW94DgKxuI/edit?usp=drive_link', '_blank')">
+            <i class="fas fa-street-view store-icon"></i>
+            <div class="store-name">Sabang</div>
+        </div>
+
+        <!-- Gambir -->
+        <div class="store-card" onclick="window.open('https://docs.google.com/spreadsheets/d/1qDSVEXnLtlpc3XBXra8M_UsBQrd4VwW-90Y3XIIBN-w/edit?usp=drive_link', '_blank')">
+            <i class="fas fa-train store-icon"></i>
+            <div class="store-name">Gambir</div>
+        </div>
+
+        <!-- Atrium -->
+        <div class="store-card" onclick="window.open('https://docs.google.com/spreadsheets/d/1KWAQTXa9XuJhluWctjgfF0_Jzglk90SBR_9biKrxP8Q/edit?usp=drive_link', '_blank')">
+            <i class="fas fa-shopping-cart store-icon"></i>
+            <div class="store-name">Atrium</div>
+        </div>
+
+        <!-- Mangga Dua Mall -->
+        <div class="store-card" onclick="window.open('https://docs.google.com/spreadsheets/d/1GsMseBbaiC2KLErYvQdl8DhOTNHZu20SG5fv4Gs48nM/edit?usp=drive_link', '_blank')">
+            <i class="fas fa-shopping-cart store-icon"></i>
+            <div class="store-name">Mangga Dua</div>
+        </div>
+
+        <!-- PRJ -->
+        <div class="store-card" onclick="window.open('https://docs.google.com/spreadsheets/d/16UDWQ0ucx6i5VXGm7sbnryl_Qo4wcyvgAvmJIDgE87o/edit?usp=drive_link', '_blank')">
+            <i class="fas fa-flag store-icon"></i>
+            <div class="store-name">PRJ</div>
+        </div>
+
+        <!-- Cempaka Mas -->
+        <div class="store-card" onclick="window.open('https://docs.google.com/spreadsheets/d/1KrmM_A4ThYp5O7Z-oMIPl_dA3cCow4omxUap7AMpnHw/edit?usp=drive_link', '_blank')">
+            <i class="fas fa-shopping-cart store-icon"></i>
+            <div class="store-name">Cempaka Mas</div>
+        </div>
+
+        <!-- Roxy Mas -->
+        <div class="store-card" onclick="window.open('https://docs.google.com/spreadsheets/d/11Bj9PHnK7yID1seWBJYUrcXrkn7cCNUg-2usFyIQdog/edit?usp=drive_link', '_blank')">
+            <i class="fas fa-shopping-cart store-icon"></i>
+            <div class="store-name">Roxy Mas</div>
+        </div>
+
+        <!-- Ruko Benhil -->
+        <div class="store-card" onclick="window.open('https://docs.google.com/spreadsheets/d/1noql_DLQrokXT1I1NzdcU_UevTcgpC7ABSTLl2b7UHQ/edit?usp=drive_link', '_blank')">
+            <i class="fas fa-building store-icon"></i>
+            <div class="store-name">Ruko Benhil</div>
+        </div>
+
+        <!-- Ruko Rawasari -->
+        <div class="store-card" onclick="window.open('https://docs.google.com/spreadsheets/d/1j1ZuAOReysW3Sxiycx9QnAT2u2SlehCLeq4aNLNGMsY/edit?usp=drive_link', '_blank')">
+            <i class="fas fa-building store-icon"></i>
+            <div class="store-name">Ruko Rawasari</div>
+        </div>
+
+        <!-- Gajah Mada Plaza -->
+        <div class="store-card" onclick="window.open('https://docs.google.com/spreadsheets/d/1o8nP7DHlwBZuLe1p2HQ4V6x_XrWJdbY5sWvWUNnfAqY/edit?usp=drive_link', '_blank')">
+            <i class="fas fa-store-alt store-icon"></i>
+            <div class="store-name">Gajah Mada</div>
+        </div>
+
+        <!-- FX Sudirman -->
+        <div class="store-card" onclick="window.open('https://docs.google.com/spreadsheets/d/1hWdQ1wspUU7TxiDoWDR-nC-GWz7M2hw_V37hsXOLzKI/edit?usp=drive_link', '_blank')">
+            <i class="fas fa-shopping-cart store-icon"></i>
+            <div class="store-name">FX Sudirman</div>
+        </div>
+
+        <!-- Plaza Senayan -->
+        <div class="store-card" onclick="window.open('https://docs.google.com/spreadsheets/d/1CCXB0R7Dlf1m46BSaP8CEAqjCdoxEcrGAtj7oQjw7Ew/edit?usp=drive_link', '_blank')">
+            <i class="fas fa-store-alt store-icon"></i>
+            <div class="store-name">Plaza Senayan</div>
+        </div>
+
+        <!-- Grand Indonesia -->
+        <div class="store-card" onclick="window.open('https://docs.google.com/spreadsheets/d/1Wgn7ihnB-w5jUzh9zKO_TXp5LgSc3NI4fw8CtyH0LF8/edit?usp=drive_link', '_blank')">
+            <i class="fas fa-shopping-cart store-icon"></i>
+            <div class="store-name">Grand Indonesia</div>
+        </div>
+
+        <!-- Menteng Huis -->
+        <div class="store-card" onclick="window.open('https://docs.google.com/spreadsheets/d/11au4OG6ExTIyumqWWBh5JNQKgnpeAw56mPjLVtZSiW4/edit?usp=drive_link', '_blank')">
+            <i class="fas fa-home store-icon"></i>
+            <div class="store-name">Menteng Huis</div>
+        </div>
+
+        <!-- Green Pramuka Square -->
+        <div class="store-card" onclick="window.open('https://docs.google.com/spreadsheets/d/1agYFn4hfMx4IXHwIY8SYhf-dLubenBzNDo547lgp3Io/edit?usp=drive_link', '_blank')">
+            <i class="fas fa-shopping-cart store-icon"></i>
+            <div class="store-name">Green Pramuka</div>
+        </div>
+
+        <!-- Cideng -->
+        <div class="store-card" onclick="window.open('https://docs.google.com/spreadsheets/d/1BU4wQN52fry4kg_iVda-wZhz6Sa7f5EsZLQACWhl7og/edit?usp=drive_link', '_blank')">
+            <i class="fas fa-street-view store-icon"></i>
+            <div class="store-name">Cideng</div>
+        </div>
+
+        <!-- RS St Carolus -->
+        <div class="store-card" onclick="window.open('https://docs.google.com/spreadsheets/d/1e9s3U2Kby072eSN1yxpZsfRlrZYsl1iLBE-bYNLBE_A/edit?usp=drive_link', '_blank')">
+            <i class="fas fa-hospital store-icon"></i>
+            <div class="store-name">RS St Carolus</div>
+        </div>
+
+        <!-- Transmart Cempaka -->
+        <div class="store-card" onclick="window.open('https://docs.google.com/spreadsheets/d/1i4-a-ru6E_jy_wK9hPCVEegaDnSW5WIbXRVB_f-M5b4/edit?usp=drive_link', '_blank')">
+            <i class="fas fa-shopping-basket store-icon"></i>
+            <div class="store-name">Transmart</div>
+        </div>
+
+        <!-- Ruko Pecenongan -->
+        <div class="store-card" onclick="window.open('https://docs.google.com/spreadsheets/d/1rhrC8xemJKOgGvmfD7LchPcLRDBlgt8ituFBa4NGc4A/edit?usp=drive_link', '_blank')">
+            <i class="fas fa-building store-icon"></i>
+            <div class="store-name">Ruko Pecenongan</div>
+        </div>
+
+        <!-- Senayan City -->
+        <div class="store-card" onclick="window.open('https://docs.google.com/spreadsheets/d/1JwL-0hSbtlPPWztar1g1Yh1XLZ1jV0KmaeVERC-DW8s/edit?usp=drive_link', '_blank')">
+            <i class="fas fa-shopping-cart store-icon"></i>
+            <div class="store-name">Senayan City</div>
+        </div>
+    </div>
+
+    <script>
+        // Anda bisa menambahkan link spreadsheet yang berbeda untuk setiap toko
+        // Contoh:
+        // document.querySelectorAll('.store-card')[0].onclick = function() {
+        //     window.open('https://docs.google.com/spreadsheets/d/UNIQUE_ID_SABANG', '_blank');
+        // };
+        // document.querySelectorAll('.store-card')[1].onclick = function() {
+        //     window.open('https://docs.google.com/spreadsheets/d/UNIQUE_ID_GAMBIR', '_blank');
+        // };
+        // Dan seterusnya...
+    </script>
+</body>
+</html>
