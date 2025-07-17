@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Laporan Bulanan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .months-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .month-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px 15px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            width: 100%;
+            max-width: 200px;
+            height: 100px;
+            text-decoration: none;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .month-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .month-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            transition: all 0.2s ease;
+        }
+        
+        .month-card:hover .month-icon {
+            transform: scale(1.1);
+        }
+        
+        .month-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        /* Warna ikon berbeda untuk setiap bulan */
+        .januari .month-icon { color: #d63031; }
+        .februari .month-icon { color: #0984e3; }
+        .maret .month-icon { color: #00b894; }
+        .april .month-icon { color: #6c5ce7; }
+        .mei .month-icon { color: #fdcb6e; }
+        .juni .month-icon { color: #e84393; }
+        .juli .month-icon { color: #00cec9; }
+        .agustus .month-icon { color: #e17055; }
+        .september .month-icon { color: #636e72; }
+        .oktober .month-icon { color: #e17055; }
+        .november .month-icon { color: #0984e3; }
+        .desember .month-icon { color: #6c5ce7; }
+        
+        /* Responsif untuk layar kecil */
+        @media (max-width: 768px) {
+            .months-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .month-card {
+                height: 90px;
+                padding: 15px 10px;
+                max-width: 160px;
+            }
+            
+            .month-icon {
+                font-size: 1.8rem;
+                margin-bottom: 8px;
+            }
+            
+            .month-name {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .months-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .month-card {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Laporan Bulanan</h1>
+        
+        <div class="months-grid">
+            <!-- Januari -->
+            <a href="https://docs.google.com/spreadsheets/Januari" class="month-card januari">
+                <i class="fas fa-snowflake month-icon"></i>
+                <div class="month-name">Januari</div>
+            </a>
+            
+            <!-- Februari -->
+            <a href="https://docs.google.com/spreadsheets/Februari" class="month-card februari">
+                <i class="fas fa-heart month-icon"></i>
+                <div class="month-name">Februari</div>
+            </a>
+            
+            <!-- Maret -->
+            <a href="https://docs.google.com/spreadsheets/Maret" class="month-card maret">
+                <i class="fas fa-seedling month-icon"></i>
+                <div class="month-name">Maret</div>
+            </a>
+            
+            <!-- April -->
+            <a href="https://docs.google.com/spreadsheets/April" class="month-card april">
+                <i class="fas fa-umbrella month-icon"></i>
+                <div class="month-name">April</div>
+            </a>
+            
+            <!-- Mei -->
+            <a href="https://docs.google.com/spreadsheets/Mei" class="month-card mei">
+                <i class="fas fa-sun month-icon"></i>
+                <div class="month-name">Mei</div>
+            </a>
+            
+            <!-- Juni -->
+            <a href="https://docs.google.com/spreadsheets/Juni" class="month-card juni">
+                <i class="fas fa-water month-icon"></i>
+                <div class="month-name">Juni</div>
+            </a>
+            
+            <!-- Juli -->
+            <a href="https://docs.google.com/spreadsheets/Juli" class="month-card juli">
+                <i class="fas fa-swimming-pool month-icon"></i>
+                <div class="month-name">Juli</div>
+            </a>
+            
+            <!-- Agustus -->
+            <a href="https://docs.google.com/spreadsheets/Agustus" class="month-card agustus">
+                <i class="fas fa-flag month-icon"></i>
+                <div class="month-name">Agustus</div>
+            </a>
+            
+            <!-- September -->
+            <a href="https://docs.google.com/spreadsheets/September" class="month-card september">
+                <i class="fas fa-leaf month-icon"></i>
+                <div class="month-name">September</div>
+            </a>
+            
+            <!-- Oktober -->
+            <a href="https://docs.google.com/spreadsheets/Oktober" class="month-card oktober">
+                <i class="fas fa-cloud-rain month-icon"></i>
+                <div class="month-name">Oktober</div>
+            </a>
+            
+            <!-- November -->
+            <a href="https://docs.google.com/spreadsheets/November" class="month-card november">
+                <i class="fas fa-wind month-icon"></i>
+                <div class="month-name">November</div>
+            </a>
+            
+            <!-- Desember -->
+            <a href="https://docs.google.com/spreadsheets/Desember" class="month-card desember">
+                <i class="fas fa-gift month-icon"></i>
+                <div class="month-name">Desember</div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
